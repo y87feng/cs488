@@ -1,0 +1,48 @@
+Changes:
+1. make "rotate" function in SceneNode virtual, and override it in JointNode
+2. add cur_angleX and cur_angleY in JointNode to trace the current angle
+
+I ran this program on gl43.student.cs.uwaterloo.ca
+
+under cs488 directory:
+cd A3
+premake4 gmake
+make
+./A3 Assets/puppet.lua
+
+hierarchical model:
+
+        leftEar - leftEarJoint - leftEarNode - head - rightEarNode - rightEarNode - rightEarNode
+                                                |
+                                            neckJoint
+                                                |
+                                            neckNode
+                                                |
+                                              neck
+                                                |
+        leftUpperArmJoint -leftUpperArmNode - torso - rightUpperArmNode - rightUpperArmJoint - rightUpperArm
+                |                               |                                                    |
+          leftUpperArm                      waistNode                                          rightUpperArm
+                |                               |                                                    |
+        leftLowerArmNode                   waistJoint                                        rightLowerArmNode
+                |                               |                                                    |
+        leftLowerArmJoint                     waist                                          rightLowerArmJoint
+                |                       /              \                                             |
+          leftLowerArm           leftThighNode   rightThighNode                                rightLowerArm
+                |                      |                |                                            |
+          leftHandNode           leftThighJoint  rightThighJoint                               rightHandNode
+                |                      |                |                                            |
+          leftHandJoint            leftThigh       rightThigh                                  rightHandJoint
+                |                      |                |                                            |
+            leftHand             leftShankNode   rightShankNode                                  rightHand
+                                       |                |
+                                 leftShankJoint  rightShankJoint
+                                       |                |
+                                   leftShank       rightShank
+                                       |                |
+                                 leftFootNode     rightFootNode
+                                       |                |
+                                 leftFootJoint    rightFootJoint
+                                       |                |
+                                    leftFoot        rightFoot
+

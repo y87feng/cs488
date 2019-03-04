@@ -1,0 +1,14 @@
+Compilation:
+
+under cs488 directory:
+cd A1
+premake4 gmake
+make
+./A1
+
+The program I tested is cs488 lab computer gl42.
+
+Manual: 
+The scale factor is 0.1f, and range is from 0.5f - 2.0f.
+The minimum height for block height is 0.0f. There is no maximum block height.
+The persistence rate depends on the drag rate.

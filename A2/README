@@ -1,0 +1,14 @@
+Compilation:
+
+under cs488 directory:
+cd A2
+premake4 gmake
+make
+./A2
+
+The program I tested is cs488 lab computer gl42.
+
+Manual: 
+x-axis is red. y-axis is green. z-axis is blue.
+The front is blue, and the back is pink.
+The near plane cannot be moved behind far plane, and the far plane cannot be moved in front of the near plane.

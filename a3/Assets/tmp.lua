@@ -1,0 +1,5 @@
+mouseArea = gr.mesh('sphere', 'mouseArea')
+mouseArea:scale(1/1.0 * 0.25,1/0.9 * 0.3,1/0.5 * 0.02)
+mouseArea:rotate('x', 10.0)
+mouseArea:translate(0, -0.22, 0.95)
+mouseArea:set_material(white)

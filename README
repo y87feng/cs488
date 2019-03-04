@@ -1,0 +1,13 @@
+Compilation:
+
+under cs488 directory:
+cd A0
+premake4 gmake
+make
+./A0
+
+The program I tested is cs488 lab computer gl30.
+
+Manual: 
+The scale factor is 0.1f.
+

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "*.ipp": "cpp",
+        "cmath": "cpp"
+    }
+}
