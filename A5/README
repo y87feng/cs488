@@ -1,0 +1,16 @@
+To build and run A4, execute the following
+    $ cd A4/
+    $ premake4 gmake
+    $ make
+    $ ./A4 <lua_script>
+
+
+----
+
+Manual for extensions:
+- implemented mirror reflection
+
+All extra features can be turn on and off using `options.hpp`
+    - Anti-aliasing(default is turned off)
+
+tested on mechine gl14
