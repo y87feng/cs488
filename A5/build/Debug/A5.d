@@ -216,7 +216,8 @@ Debug/A5.o: ../A5.cpp ../../shared/include/glm/ext.hpp \
  ../../shared/include/glm/./gtx/../detail/intrinsic_matrix.inl \
  ../../shared/include/glm/./gtx/simd_mat4.inl ../A5.hpp ../SceneNode.hpp \
  ../Material.hpp ../Ray.hpp ../HitRecord.hpp ../Light.hpp ../Image.hpp \
- ../GeometryNode.hpp ../Primitive.hpp ../PhongMaterial.hpp ../options.hpp
+ ../GeometryNode.hpp ../Primitive.hpp ../PhongMaterial.hpp ../options.hpp \
+ ../random.hpp
 
 ../../shared/include/glm/ext.hpp:
 
@@ -673,3 +674,5 @@ Debug/A5.o: ../A5.cpp ../../shared/include/glm/ext.hpp \
 ../PhongMaterial.hpp:
 
 ../options.hpp:
+
+../random.hpp:

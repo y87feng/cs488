@@ -78,6 +78,7 @@ OBJECTS := \
 	$(OBJDIR)/SceneNode.o \
 	$(OBJDIR)/polyroots.o \
 	$(OBJDIR)/scene_lua.o \
+	$(OBJDIR)/random.o \
 
 RESOURCES := \
 
@@ -178,6 +179,9 @@ $(OBJDIR)/polyroots.o: ../polyroots.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/scene_lua.o: ../scene_lua.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/random.o: ../random.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 

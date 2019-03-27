@@ -12,20 +12,13 @@
 #include "GeometryNode.hpp"
 #include "PhongMaterial.hpp"
 #include "options.hpp"
+#include "random.hpp"
 
 
 using namespace std;
 using namespace glm;
 
 static const float Correction = 0.0001;
-
-static float rand_float() {
-    float x;
-    do {
-        x = (float) rand() / (RAND_MAX);
-    } while (x == 1);
-    return x;
-}
 
 static vec3 random_in_unit_disk() {
     vec3 p;
@@ -110,7 +103,7 @@ vec3 trace_color(Ray &ray,
 				color = glm::mix(color, trace_color(reflection_ray, root, eye, ambient, lights, maxHits - 1), pm->reflectiveness());
 
 				// refraction 
-
+				
 			}
 
 			

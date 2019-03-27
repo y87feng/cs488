@@ -11,19 +11,12 @@
 #include "Mesh.hpp"
 #include "options.hpp"
 #include "polyroots.hpp"
+#include "random.hpp"
 
 using namespace glm;
 using namespace std;
 
 static const float Epsilon = 1e-2;
-
-static float rand_float() {
-    float x;
-    do {
-        x = (float) rand() / (RAND_MAX);
-    } while (x == 1);
-    return x;
-}
 
 // retrieve https://github.com/stharlan/oglwalker/blob/768c3fb65ebf831f20dae0747b72d9f959f1f121/OglWalker/GeometryOperations.cpp
 bool triangleIntersection(Ray &ray, vec3 vertex0, vec3 vertex1, vec3 vertex2, float &res) {

@@ -216,7 +216,7 @@ Debug/Mesh.o: ../Mesh.cpp ../../shared/include/glm/ext.hpp \
  ../../shared/include/glm/./gtx/../detail/intrinsic_matrix.inl \
  ../../shared/include/glm/./gtx/simd_mat4.inl ../Mesh.hpp \
  ../Primitive.hpp ../HitRecord.hpp ../Material.hpp ../Ray.hpp \
- ../options.hpp ../polyroots.hpp
+ ../options.hpp ../polyroots.hpp ../random.hpp
 
 ../../shared/include/glm/ext.hpp:
 
@@ -665,3 +665,5 @@ Debug/Mesh.o: ../Mesh.cpp ../../shared/include/glm/ext.hpp \
 ../options.hpp:
 
 ../polyroots.hpp:
+
+../random.hpp:
