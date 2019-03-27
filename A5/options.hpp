@@ -4,4 +4,4 @@
 
 #define ENABLE_MULTITHREAD
 
-// #define ENABLE_BVH
+#define ENABLE_BVH

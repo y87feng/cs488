@@ -7,7 +7,10 @@ PhongMaterial::PhongMaterial(
 	: m_kd(kd)
 	, m_ks(ks)
 	, m_shininess(shininess)
-{}
+{
+	m_reflectiveness = 0.3f;
+	m_refractiveness = 0.7f;
+}
 
 PhongMaterial::~PhongMaterial()
 {}
@@ -22,4 +25,12 @@ glm::vec3 PhongMaterial::specular() {
 
 double PhongMaterial::shininess() {
 	return m_shininess;
+}
+
+double PhongMaterial::reflectiveness() {
+	return m_reflectiveness;
+}
+
+double PhongMaterial::refractiveness() {
+	return m_refractiveness;
 }

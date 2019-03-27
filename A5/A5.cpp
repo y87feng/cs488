@@ -100,12 +100,21 @@ vec3 trace_color(Ray &ray,
 		}
 
 		if (maxHits > 0) {
-			// reflection
-			vec3 reflection_direction = ray.Get_direction() - 2 * record.normal * dot(ray.Get_direction(), record.normal);
-            Ray reflection_ray(record.hit_point, reflection_direction);
-			// cout << "relection ray " << to_string(reflection_ray.origin) << endl;
-			float reflect_coef = 0.2;
-			color = glm::mix(color, trace_color(reflection_ray, root, eye, ambient, lights, maxHits - 1), reflect_coef);
+			PhongMaterial* pm = dynamic_cast<PhongMaterial*>(record.material);
+			if (pm != nullptr) {
+				// reflection
+				vec3 reflection_direction = ray.Get_direction() - 2 * record.normal * dot(ray.Get_direction(), record.normal);
+				Ray reflection_ray(record.hit_point, reflection_direction);
+				// cout << "relection ray " << to_string(reflection_ray.origin) << endl;
+				float reflect_coef = 0.2;
+				color = glm::mix(color, trace_color(reflection_ray, root, eye, ambient, lights, maxHits - 1), pm->reflectiveness());
+
+				// refraction 
+
+			}
+
+			
+
 		}
 
 	} else {

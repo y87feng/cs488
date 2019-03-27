@@ -92,7 +92,7 @@ bool NonhierSphere::hit(Ray &ray, float t_min, float t_max, HitRecord &record) {
 NonhierBox::NonhierBox(const glm::vec3& pos, double size)
     : m_pos(pos), m_size(size)
   {
-    std::vector<glm::vec3> vertices(8);
+    vertices.resize(8);
     vertices[0] = m_pos + glm::vec3(0.0, 0.0, 0.0);
     vertices[1] = m_pos + glm::vec3(m_size, 0.0, 0.0);
     vertices[2] = m_pos + glm::vec3(m_size, 0.0, m_size);
@@ -117,7 +117,7 @@ NonhierBox::NonhierBox(const glm::vec3& pos, double size)
       Triangle(6, 3, 2)
     };
 
-    m_mesh = new Mesh(vertices, triangle_inx);
+    m_mesh = new Mesh(&vertices, triangle_inx);
   }
 
 NonhierBox::~NonhierBox()

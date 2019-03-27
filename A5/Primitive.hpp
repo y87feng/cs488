@@ -3,7 +3,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-
+#include <vector>
 #include "HitRecord.hpp"
 #include "Ray.hpp"
 
@@ -59,6 +59,7 @@ public:
 private:
   glm::vec3 m_pos;
   double m_size;
+  std::vector<glm::vec3> vertices;
 
   Primitive * m_mesh;
 };

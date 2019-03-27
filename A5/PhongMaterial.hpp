@@ -13,10 +13,14 @@ public:
   glm::vec3 diffuse();
   glm::vec3 specular();
   double shininess();
+  double reflectiveness();
+  double refractiveness();
 
 private:
   glm::vec3 m_kd;
   glm::vec3 m_ks;
 
   double m_shininess;
+  double m_reflectiveness;
+  double m_refractiveness;
 };
