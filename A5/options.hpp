@@ -1,3 +1,7 @@
 #pragma once
 
-#define ENABLE_ANTI_ALIASING 0
+#define ENABLE_ANTI_ALIASING
+
+#define ENABLE_MULTITHREAD
+
+// #define ENABLE_BVH

@@ -9,6 +9,8 @@
 #include <glm/glm.hpp>
 
 #include "Primitive.hpp"
+#include "options.hpp"
+
 
 struct Triangle
 {
@@ -27,11 +29,22 @@ struct Triangle
 class Mesh : public Primitive {
 public:
   Mesh( const std::string& fname );
-  Mesh( std::vector<glm::vec3>& all_vertices, const std::vector<glm::vec3> &faces);
+  Mesh( std::vector<glm::vec3>& all_vertices, std::vector<Triangle> &faces);
   virtual bool hit(Ray &ray, float t_min, float t_max, HitRecord &record) override;
 private:
 	std::vector<glm::vec3> m_vertices;
 	std::vector<Triangle> m_faces;
+
+#ifdef ENABLE_BVH
+    Triangle m_face;
+#endif 
+
+	glm::vec3 min_xyz;
+	glm::vec3 max_xyz;
+
+#ifdef ENABLE_BVH
+	void BVH_Split();
+#endif
 
     friend std::ostream& operator<<(std::ostream& out, const Mesh& mesh);
 };

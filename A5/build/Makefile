@@ -22,7 +22,7 @@ endif
 ifeq ($(config),debug)
   OBJDIR     = Debug
   TARGETDIR  = ..
-  TARGET     = $(TARGETDIR)/A4
+  TARGET     = $(TARGETDIR)/A5
   DEFINES   += -DDEBUG
   INCLUDES  += -I../../shared -I../../shared/include -I../../shared/gl3w -I../../shared/imgui
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
@@ -44,7 +44,7 @@ endif
 ifeq ($(config),release)
   OBJDIR     = Release
   TARGETDIR  = ..
-  TARGET     = $(TARGETDIR)/A4
+  TARGET     = $(TARGETDIR)/A5
   DEFINES   += -DNDEBUG
   INCLUDES  += -I../../shared -I../../shared/include -I../../shared/gl3w -I../../shared/imgui
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
@@ -64,7 +64,7 @@ ifeq ($(config),release)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/A4.o \
+	$(OBJDIR)/A5.o \
 	$(OBJDIR)/GeometryNode.o \
 	$(OBJDIR)/Image.o \
 	$(OBJDIR)/JointNode.o \
@@ -95,7 +95,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 	@:
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES)
-	@echo Linking A4
+	@echo Linking A5
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -116,7 +116,7 @@ else
 endif
 
 clean:
-	@echo Cleaning A4
+	@echo Cleaning A5
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -138,7 +138,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 endif
 
-$(OBJDIR)/A4.o: ../A4.cpp
+$(OBJDIR)/A5.o: ../A5.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/GeometryNode.o: ../GeometryNode.cpp

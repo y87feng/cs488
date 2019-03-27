@@ -5,13 +5,25 @@
 
 #include <glm/ext.hpp>
 #include <glm/glm.hpp>
+#include <algorithm>
+
 
 // #include "cs488-framework/ObjFileDecoder.hpp"
 #include "Mesh.hpp"
+#include "options.hpp"
 
 using namespace glm;
 using namespace std;
 
+static const double Epsilon = 1e-2;
+
+static float rand_float() {
+    float x;
+    do {
+        x = (float) rand() / (RAND_MAX);
+    } while (x == 1);
+    return x;
+}
 
 // retrieve https://github.com/stharlan/oglwalker/blob/768c3fb65ebf831f20dae0747b72d9f959f1f121/OglWalker/GeometryOperations.cpp
 bool triangleIntersection(Ray &ray, vec3 vertex0, vec3 vertex1, vec3 vertex2, float &res) {
@@ -46,15 +58,41 @@ bool triangleIntersection(Ray &ray, vec3 vertex0, vec3 vertex1, vec3 vertex2, fl
     return false;
 }
 
+#ifdef ENABLE_BVH
+void Mesh::BVH_Split() {
+
+	if ( m_faces.size() == 1 ) {
+			m_face = m_faces[0];
+	} else {
+			int axis = int( 3 * rand_float() );
+
+			// sort by random direction
+			cout << "got " << m_faces.size() << " faces " << endl;
+			cout << "split by " << axis << ", ";
+
+			std::sort( m_faces.begin(), m_faces.end(), [&](const Triangle t1, const Triangle t2) {
+							double x1 = m_vertices[t1.v1][axis];
+							double x2 = m_vertices[t2.v1][axis];
+							return x1 < x2;
+							});
+			vector<Triangle> left_vec = vector<Triangle>( m_faces.begin(), m_faces.begin() + m_faces.size() / 2 );
+			vector<Triangle> right_vec = vector<Triangle>( m_faces.begin() + m_faces.size() / 2, m_faces.end() );
+			left = new Mesh( m_vertices, left_vec);
+			right = new Mesh( m_vertices, right_vec);
+	}
+	m_faces.clear();
+}
+#endif
+
 
 Mesh::Mesh( const std::string& fname )
-	: m_vertices()
-	, m_faces()
 {
 	// cout << fname << " Mesh constructor" << endl;
 	std::string code;
 	double vx, vy, vz;
 	size_t s1, s2, s3;
+
+	// vector<vec3> tmp_vertices;
 
 	std::ifstream ifs( fname.c_str() );
 	while( ifs >> code ) {
@@ -66,6 +104,13 @@ Mesh::Mesh( const std::string& fname )
 			m_faces.push_back( Triangle( s1 - 1, s2 - 1, s3 - 1 ) );
 		}
 	}
+
+	// m_vertices = &tmp_vertices;
+
+	// implement BVH
+#ifdef ENABLE_BVH
+	BVH_Split();
+#endif
 }
 
 std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
@@ -118,13 +163,13 @@ bool Mesh::hit(Ray &ray, float t_min, float t_max, HitRecord &record) {
 	return hit;
 }
 
-Mesh::Mesh( std::vector<glm::vec3>& all_vertices, const std::vector<glm::vec3> &faces) :
-	m_vertices(all_vertices) {
+Mesh::Mesh( std::vector<glm::vec3>& all_vertices, std::vector<Triangle> &faces) {
+	m_vertices = all_vertices;
+	m_faces = faces;
+	// m_faces.resize(faces.size());
+	// for (size_t i = 0; i < faces.size(); i++) {
+	// 	Triangle tri((size_t)faces[i].x, (size_t)faces[i].y, (size_t)faces[i].z);
 
-	m_faces.resize(faces.size());
-	for (size_t i = 0; i < faces.size(); i++) {
-		Triangle tri((size_t)faces[i].x, (size_t)faces[i].y, (size_t)faces[i].z);
-
-		m_faces[i] = tri;
-	}
+	// 	m_faces[i] = tri;
+	// }
 }

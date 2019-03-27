@@ -55,7 +55,7 @@
 #include "Primitive.hpp"
 #include "Material.hpp"
 #include "PhongMaterial.hpp"
-#include "A4.hpp"
+#include "A5.hpp"
 
 typedef std::map<std::string,Mesh*> MeshMap;
 static MeshMap mesh_map;
@@ -347,7 +347,7 @@ int gr_render_cmd(lua_State* L)
   }
 
 	Image im( width, height);
-	A4_Render(root->node, im, eye, view, up, fov, ambient, lights);
+	A5_Render(root->node, im, eye, view, up, fov, ambient, lights);
     im.savePng( filename );
 
 	return 0;

@@ -102,19 +102,19 @@ NonhierBox::NonhierBox(const glm::vec3& pos, double size)
     vertices[6] = m_pos + glm::vec3(m_size, m_size, m_size);
     vertices[7] = m_pos + glm::vec3(0.0, m_size, m_size);
     
-    std::vector<glm::vec3> triangle_inx = {
-      glm::vec3(0, 1, 2),
-      glm::vec3(0, 2, 3),
-      glm::vec3(0, 7, 4),
-      glm::vec3(0, 3, 7),
-      glm::vec3(0, 4, 5),
-      glm::vec3(0, 5, 1),
-      glm::vec3(6, 2, 1),
-      glm::vec3(6, 1, 5),
-      glm::vec3(6, 5, 4),
-      glm::vec3(6, 4, 7),
-      glm::vec3(6, 7, 3),
-      glm::vec3(6, 3, 2)
+    std::vector<Triangle> triangle_inx = {
+      Triangle(0, 1, 2),
+      Triangle(0, 2, 3),
+      Triangle(0, 7, 4),
+      Triangle(0, 3, 7),
+      Triangle(0, 4, 5),
+      Triangle(0, 5, 1),
+      Triangle(6, 2, 1),
+      Triangle(6, 1, 5),
+      Triangle(6, 5, 4),
+      Triangle(6, 4, 7),
+      Triangle(6, 7, 3),
+      Triangle(6, 3, 2)
     };
 
     m_mesh = new Mesh(vertices, triangle_inx);
