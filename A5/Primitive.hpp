@@ -48,13 +48,40 @@ private:
 };
 
 
-
-
 class NonhierBox : public Primitive {
 public:
   NonhierBox(const glm::vec3& pos, double size);
 
   virtual ~NonhierBox();
+  virtual bool hit( Ray &ray, float t_min, float t_max, HitRecord &record) override;
+private:
+  glm::vec3 m_pos;
+  double m_size;
+  std::vector<glm::vec3> vertices;
+
+  Primitive * m_mesh;
+};
+
+class NonhierTriPrism : public Primitive {
+public:
+  NonhierTriPrism(const glm::vec3& pos, double side_len, double height);
+
+  virtual ~NonhierTriPrism();
+  virtual bool hit( Ray &ray, float t_min, float t_max, HitRecord &record) override;
+private:
+  glm::vec3 m_pos;
+  double m_side_len;
+  double m_height;
+  std::vector<glm::vec3> vertices;
+
+  Primitive * m_mesh;
+};
+
+class NonhierTriPyramid : public Primitive {
+public:
+  NonhierTriPyramid(const glm::vec3& pos, double size);
+
+  virtual ~NonhierTriPyramid();
   virtual bool hit( Ray &ray, float t_min, float t_max, HitRecord &record) override;
 private:
   glm::vec3 m_pos;

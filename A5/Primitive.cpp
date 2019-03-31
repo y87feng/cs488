@@ -128,3 +128,66 @@ NonhierBox::~NonhierBox()
 bool NonhierBox::hit(Ray &ray, float t_min, float t_max, HitRecord &record) {
    return m_mesh->hit(ray, t_min, t_max, record);
 }
+
+NonhierTriPrism::NonhierTriPrism(const glm::vec3& pos, double side_len, double height) {
+    m_pos = pos;
+    m_side_len = side_len;
+    m_height = height;
+
+    vertices.resize(6);
+    vertices[0] = m_pos + glm::vec3(0.0, 0.0, 0.0);
+    vertices[1] = m_pos + glm::vec3(side_len, 0.0, 0.0);
+    vertices[2] = m_pos + glm::vec3(side_len/2, 0.0, side_len * sqrt(3) / 2);
+    vertices[3] = m_pos + glm::vec3(0.0, height, 0);
+    vertices[4] = m_pos + glm::vec3(side_len, height, 0.0);
+    vertices[5] = m_pos + glm::vec3(side_len/2, height, side_len * sqrt(3) / 2);
+    
+    std::vector<Triangle> triangle_inx = {
+      Triangle(0, 1, 2),
+      Triangle(0, 1, 3),
+      Triangle(1, 3, 4),
+      Triangle(0, 2, 3),
+      Triangle(2, 3, 5),
+      Triangle(3, 4, 5),
+      Triangle(1, 2, 4),
+      Triangle(2, 4, 5)
+    };
+
+    m_mesh = new Mesh(&vertices, triangle_inx);
+}
+
+NonhierTriPrism::~NonhierTriPrism()
+{
+    delete m_mesh;
+}
+
+bool NonhierTriPrism::hit(Ray &ray, float t_min, float t_max, HitRecord &record) {
+   return m_mesh->hit(ray, t_min, t_max, record);
+}
+
+NonhierTriPyramid::NonhierTriPyramid(const glm::vec3& pos, double size)
+    : m_pos(pos), m_size(size) {
+    vertices.resize(4);
+    vertices[0] = m_pos + glm::vec3(0.0, 0.0, 0.0);
+    vertices[1] = m_pos + glm::vec3(size, 0.0, 0.0);
+    vertices[2] = m_pos + glm::vec3(size/2, 0.0, size * sqrt(3) / 2);
+    vertices[3] = m_pos + glm::vec3(size/2, size, size/2);
+    
+    std::vector<Triangle> triangle_inx = {
+      Triangle(0, 1, 2),
+      Triangle(0, 1, 3),
+      Triangle(1, 2, 3),
+      Triangle(0, 2, 3)
+    };
+
+    m_mesh = new Mesh(&vertices, triangle_inx);
+}
+
+NonhierTriPyramid::~NonhierTriPyramid()
+{
+    delete m_mesh;
+}
+
+bool NonhierTriPyramid::hit(Ray &ray, float t_min, float t_max, HitRecord &record) {
+   return m_mesh->hit(ray, t_min, t_max, record);
+}

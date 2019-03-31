@@ -37,6 +37,16 @@ plane = gr.mesh( 'plane', 'plane.obj' )
 scene:add_child(plane)
 plane:set_material(grass)
 plane:scale(30, 30, 30)
+-- plane:rotate('X', 45)
+-- plane:translate(0, 5, 3)
+
+-- the floor
+glass = gr.mesh( 'glass', 'plane.obj' )
+scene:add_child(glass)
+glass:set_material(blue)
+glass:scale(5, 5, 1)
+glass:rotate('X', 45)
+glass:translate(-5, 5, 3)
 
 -- sphere
 poly = gr.mesh( 'poly', 'dodeca.obj' )

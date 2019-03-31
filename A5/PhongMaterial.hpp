@@ -15,6 +15,7 @@ public:
   double shininess();
   double reflectiveness();
   double refractiveness();
+  double refraction_ratio();
 
 private:
   glm::vec3 m_kd;
@@ -23,4 +24,6 @@ private:
   double m_shininess;
   double m_reflectiveness;
   double m_refractiveness;
+  
+  double m_refraction_ratio;
 };

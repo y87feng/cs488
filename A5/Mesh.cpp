@@ -60,8 +60,8 @@ void Mesh::BVH_Split() {
 			int axis = int( 3 * rand_float() );
 
 			// sort by random direction
-			cout << "got " << m_faces.size() << " faces " << endl;
-			cout << "split by " << axis << ", ";
+			// cout << "got " << m_faces.size() << " faces " << endl;
+			// cout << "split by " << axis << ", ";
 
 			std::sort( m_faces.begin(), m_faces.end(), [&](const Triangle t1, const Triangle t2) {
 							double x1 = (*m_vertices)[t1.v1][axis];
@@ -103,7 +103,7 @@ Mesh::Mesh( const std::string& fname )
 	}
 
 	m_vertices = &m_real_vertices;
-	cout << "mesh constructor " << endl; 
+	// cout << "mesh constructor " << endl; 
 
 	// find min_xyz and max_xyz, this is the root bounding box
 	if (m_real_vertices.size() != 0) {
@@ -119,8 +119,8 @@ Mesh::Mesh( const std::string& fname )
 			  glm::max(max_xyz.z, point.z + Epsilon) );
         }
 	}
-	cout << "min_xyz " << to_string(min_xyz) << endl;
-	cout << "max_xyz " << to_string(max_xyz) << endl;
+	// cout << "min_xyz " << to_string(min_xyz) << endl;
+	// cout << "max_xyz " << to_string(max_xyz) << endl;
 
 	// implement BVH
 #ifdef ENABLE_BVH
@@ -270,9 +270,9 @@ Mesh::Mesh( std::vector<glm::vec3>* all_vertices, std::vector<Triangle> &faces) 
     left = NULL;
     right = NULL;
 #endif
-	static int level = 0;
-	level ++;
-	cout << "level is " << level << endl; 
+	// static int level = 0;
+	// level ++;
+	// cout << "level is " << level << endl; 
 	m_vertices = all_vertices;
 	m_faces = faces;
 
@@ -290,8 +290,8 @@ Mesh::Mesh( std::vector<glm::vec3>* all_vertices, std::vector<Triangle> &faces) 
             }
         }
 	}
-	cout << "min_xyz " << to_string(min_xyz) << endl;
-	cout << "max_xyz " << to_string(max_xyz) << endl;
+	// cout << "min_xyz " << to_string(min_xyz) << endl;
+	// cout << "max_xyz " << to_string(max_xyz) << endl;
 
 #ifdef ENABLE_BVH
 	// cout << "BVH\n";
