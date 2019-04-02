@@ -197,8 +197,8 @@ vec3 trace_color(Ray &ray,
 #endif
 
 #endif
-				float reflect_coef = 0.2f;
-				float refract_coef = 0.4f;
+				float reflect_coef = 0.0f;
+				float refract_coef = 0.0f;
 				// cout << " color is " << to_string(color) << endl;
 				color = (1-reflect_coef-refract_coef) * color + reflect_coef * refleciton_color + refract_coef * refraciton_color;
 				// cout << " color is " << to_string(color) << endl;
