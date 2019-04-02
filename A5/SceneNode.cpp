@@ -142,6 +142,7 @@ bool SceneNode::hit(Ray &ray, float t_min, float t_max, HitRecord &record) {
 	Ray transformedRay;
 	transformedRay.origin = vec3(invtrans * vec4(ray.origin, 1.0));
 	transformedRay.direction = vec3(invtrans * vec4(ray.direction, 0.0));
+	transformedRay.time = ray.get_time();
 
 	// cout << " " << m_name << endl;
 	HitRecord tmp_record;

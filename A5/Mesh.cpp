@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include <glm/ext.hpp>
 #include <glm/glm.hpp>
@@ -92,13 +93,19 @@ Mesh::Mesh( const std::string& fname )
 	// vector<vec3> tmp_vertices;
 
 	std::ifstream ifs( fname.c_str() );
-	while( ifs >> code ) {
+	std::string line;
+	while( std::getline(ifs, line) ) {
+		std::istringstream iss(line);
+		iss >> code;
 		if( code == "v" ) {
-			ifs >> vx >> vy >> vz;
+			iss >> vx >> vy >> vz;
 			m_real_vertices.push_back( glm::vec3( vx, vy, vz ) );
 		} else if( code == "f" ) {
-			ifs >> s1 >> s2 >> s3;
-			m_faces.push_back( Triangle( s1 - 1, s2 - 1, s3 - 1 ) );
+			while (iss >> s1 >> s2 >> s3) {
+				// ifs >> s1 >> s2 >> s3;
+				// cout << "loop\n";
+				m_faces.push_back( Triangle( s1 - 1, s2 - 1, s3 - 1 ) );
+			}
 		}
 	}
 
@@ -239,9 +246,9 @@ bool Mesh::hit(Ray &ray, float t_min, float t_max, HitRecord &record) {
 	// cout << "mesh " << m_faces.size() << endl;
 	for ( auto triangle : m_faces ) {
         float tmp_t;
-		cout << "normal before hit\n";
+		// cout << "normal before hit\n";
         if ( triangleIntersection(ray, (*m_vertices)[triangle.v1], (*m_vertices)[triangle.v2], (*m_vertices)[triangle.v3], tmp_t) ) {
-			cout << "hit\n";
+			// cout << "hit\n";
             if ( tmp_t < cur_min_maxt && tmp_t > t_min ) {
                 hit = true;
                 cur_min_maxt = tmp_t;

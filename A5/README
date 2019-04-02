@@ -1,16 +1,24 @@
-To build and run A4, execute the following
-    $ cd A4/
+To build and run A5, execute the following
+    $ cd A5/
     $ premake4 gmake
     $ make
-    $ ./A4 <lua_script>
+    $ cd Assets
+    $ ../A5 <lua_script>
 
 
 ----
 
-Manual for extensions:
-- implemented mirror reflection
-
 All extra features can be turn on and off using `options.hpp`
-    - Anti-aliasing(default is turned off)
 
-tested on mechine gl14
+1: Extra primitives(triangular prism, triangular pyramid)
+2: Reflection
+3: Refraction
+4: Glossy reflection
+5: Glossy refraction
+6: Soft shadows
+7: Depth of field
+8: Motion blur
+9: Final Scene
+10: Acceleration(bounding volume hierarchy)
+
+tested on mechine gl41

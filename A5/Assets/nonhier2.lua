@@ -4,10 +4,13 @@
 -- The translation moves the scene, and the position of the camera
 -- and lights have been modified accordingly.
 
-mat1 = gr.material({0.7, 1.0, 0.7}, {0.5, 0.7, 0.5}, 25)
+mat1 = gr.material({0.7, 1.0, 0.7}, {0.5, 0.7, 0.5}, 25, 0.3, 0.3, 0.8)
 mat2 = gr.material({0.5, 0.5, 0.5}, {0.5, 0.7, 0.5}, 25)
 mat3 = gr.material({1.0, 0.6, 0.1}, {0.5, 0.7, 0.5}, 25)
 mat4 = gr.material({0.7, 0.6, 1.0}, {0.5, 0.4, 0.8}, 25)
+blue = gr.material({0.0, 0.25, 0.53}, {0.0, 0.25, 0.53}, 25)
+gold = gr.material({0.93, 0.8, 0.38}, {0.91, 0.78, 0.51}, 25)
+
 
 scene = gr.node( 'scene' )
 scene:translate(0, 0, -800)
@@ -22,19 +25,27 @@ s2:set_material(mat1)
 
 s3 = gr.nh_sphere('s3', {0, -1200, -500}, 1000)
 scene:add_child(s3)
-s3:set_material(mat2)
+s3:set_material(blue)
 
 b1 = gr.nh_box('b1', {-200, -125, 0}, 100)
 scene:add_child(b1)
 b1:set_material(mat4)
 
-s4 = gr.nh_sphere('s4', {-100, 25, -300}, 50)
+s4 = gr.nh_sphere('s4', {0, 25, -300}, 50)
 scene:add_child(s4)
 s4:set_material(mat3)
 
 s5 = gr.nh_sphere('s5', {0, 100, -250}, 25)
 scene:add_child(s5)
 s5:set_material(mat1)
+
+s6 = gr.nh_triprism('s6', {-200, 0, 0}, 100, 200)
+scene:add_child(s6)
+s6:set_material(mat1)
+
+s7 = gr.nh_tripyramid('s7', {100, -250, 25}, 150)
+scene:add_child(s7)
+s7:set_material(gold)
 
 -- A small stellated dodecahedron.
 
@@ -45,6 +56,6 @@ scene:add_child(steldodec)
 white_light = gr.light({-100.0, 150.0, -400.0}, {0.9, 0.9, 0.9}, {1, 0, 0})
 magenta_light = gr.light({400.0, 100.0, -650.0}, {0.7, 0.0, 0.7}, {1, 0, 0})
 
-gr.render(scene, 'nonhier2.png', 256, 256,
+gr.render(scene, 'nonhier2.png', 512, 512,
 	  {0, 0, 0}, {0, 0, -1}, {0, 1, 0}, 50,
 	  {0.3, 0.3, 0.3}, {white_light, magenta_light})

@@ -220,6 +220,36 @@ int gr_nh_sphere_cmd(lua_State* L)
   return 1;
 }
 
+
+// Create a non-hierarchical motion blur Sphere node
+extern "C"
+int gr_nh_sphere_motion_blur_cmd(lua_State* L)
+{
+  GRLUA_DEBUG_CALL;
+  
+  gr_node_ud* data = (gr_node_ud*)lua_newuserdata(L, sizeof(gr_node_ud));
+  data->node = 0;
+
+  const char* name = luaL_checkstring(L, 1);
+
+  glm::vec3 pos;
+  get_tuple(L, 2, &pos[0], 3);
+
+  double radius = luaL_checknumber(L, 3);
+
+  glm::vec3 velocity;
+  get_tuple(L, 4, &velocity[0], 3);
+
+  std::cout << glm::to_string(velocity) << std::endl;
+
+  data->node = new GeometryNode(name, new NonhierSphere(pos, radius, velocity));
+
+  luaL_getmetatable(L, "gr.node");
+  lua_setmetatable(L, -2);
+
+  return 1;
+}
+
 // Create a non-hierarchical Box node
 extern "C"
 int gr_nh_box_cmd(lua_State* L)
@@ -416,16 +446,31 @@ int gr_material_cmd(lua_State* L)
   get_tuple(L, 2, ks, 3);
 
   double shininess = luaL_checknumber(L, 3);
+
+  // std::cout << lua_gettop(L) << std::endl;
+
+  if (lua_gettop(L) == 7) {
+    double reflectiveness = luaL_checknumber(L, 4);
+    double refractiveness = luaL_checknumber(L, 5);
+    double refractive_ratio = luaL_checknumber(L, 6);
+
+    data->material = new PhongMaterial(glm::vec3(kd[0], kd[1], kd[2]),
+                                      glm::vec3(ks[0], ks[1], ks[2]),
+                                      shininess, reflectiveness,
+                                      refractiveness, refractive_ratio);
+  } else {
   
-  data->material = new PhongMaterial(glm::vec3(kd[0], kd[1], kd[2]),
-                                     glm::vec3(ks[0], ks[1], ks[2]),
-                                     shininess);
+    data->material = new PhongMaterial(glm::vec3(kd[0], kd[1], kd[2]),
+                                      glm::vec3(ks[0], ks[1], ks[2]),
+                                      shininess);
+  }
 
   luaL_newmetatable(L, "gr.material");
   lua_setmetatable(L, -2);
   
   return 1;
 }
+
 
 // Add a Child to a node
 extern "C"
@@ -573,6 +618,7 @@ static const luaL_Reg grlib_functions[] = {
   // New for assignment 4
   {"cube", gr_cube_cmd},
   {"nh_sphere", gr_nh_sphere_cmd},
+  {"nh_sphere_mb", gr_nh_sphere_motion_blur_cmd},
   {"nh_box", gr_nh_box_cmd},
   {"nh_triprism", gr_nh_tri_prism_cmd},
   {"nh_tripyramid", gr_nh_tri_pyramid_cmd},

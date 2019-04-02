@@ -33,16 +33,15 @@ public:
 
 class NonhierSphere : public Primitive {
 public:
-  NonhierSphere(const glm::vec3& pos, double radius)
-    : m_pos(pos), m_radius(radius)
-  {
-  }
+  NonhierSphere(const glm::vec3& pos, double radius);
+  NonhierSphere(const glm::vec3& pos, double radius, const glm::vec3 v);
   virtual ~NonhierSphere();
   virtual bool hit( Ray &ray, float t_min, float t_max, HitRecord &record) override;
 
 private:
   glm::vec3 m_pos;
   double m_radius;
+  glm::vec3 velocity;
 
   glm::vec3 vertices[8];
 };
